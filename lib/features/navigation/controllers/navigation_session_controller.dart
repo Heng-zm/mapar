@@ -82,8 +82,8 @@ class NavigationSessionController extends ChangeNotifier {
     final endedAt = DateTime.now();
     final duration = endedAt.difference(_startedAt!).inSeconds.toDouble();
     final distance = GeoUtils.totalDistanceMeters(_travelPath);
-    final averageSpeed = _speedSamples.isEmpty
-        ? (duration > 0 ? distance / duration : 0)
+    final double averageSpeed = _speedSamples.isEmpty
+        ? (duration > 0 ? distance / duration : 0.0)
         : _speedSamples.reduce((a, b) => a + b) / _speedSamples.length;
 
     final trip = TripRecord(
@@ -114,8 +114,8 @@ class NavigationSessionController extends ChangeNotifier {
 
   double progress(GeoPoint? current) {
     if (_route == null || _route!.distanceMeters <= 0) return 0;
-    final remaining = distanceRemaining(current).clamp(0, _route!.distanceMeters);
-    return (1 - remaining / _route!.distanceMeters).clamp(0, 1).toDouble();
+    final remaining = distanceRemaining(current).clamp(0.0, _route!.distanceMeters).toDouble();
+    return (1.0 - remaining / _route!.distanceMeters).clamp(0.0, 1.0).toDouble();
   }
 
   String currentInstruction(GeoPoint? current) {

@@ -25,24 +25,23 @@ Mapp AR is a first working version of a smart map and simulated AR navigation ap
 
 Do not hardcode your Mapbox token in Dart files for production.
 
-For development:
+This patch removes all `.env` / `flutter_dotenv` asset loading. That fixes Flutter Web 404 errors like:
 
-1. Copy `.env.example` to `.env`.
-2. Put your public Mapbox token in `.env`:
-
-```env
-MAPBOX_ACCESS_TOKEN=pk.your_public_token_here
+```text
+Flutter Web engine failed to fetch "assets/.env"
 ```
 
-You can also pass the token at build/run time:
+Provide the token at run/build time with `--dart-define`:
 
 ```bash
-flutter run --dart-define MAPBOX_ACCESS_TOKEN=pk.your_public_token_here
-flutter build apk --dart-define MAPBOX_ACCESS_TOKEN=pk.your_public_token_here
-flutter build ios --dart-define MAPBOX_ACCESS_TOKEN=pk.your_public_token_here
+flutter run --dart-define=MAPBOX_ACCESS_TOKEN=pk.your_public_token_here
+flutter build apk --dart-define=MAPBOX_ACCESS_TOKEN=pk.your_public_token_here
+flutter build ios --dart-define=MAPBOX_ACCESS_TOKEN=pk.your_public_token_here
 ```
 
-The app also has a Settings screen token override for development/testing. For production, prefer `.env` or `--dart-define` and avoid committing secrets.
+For local testing, you can also open the app and paste the token in **Settings → Mapbox token**. It is saved locally with SharedPreferences.
+
+Mapbox public mobile tokens are client-side config, but still use your own restricted token for production.
 
 ## How to create the project
 
@@ -58,7 +57,6 @@ Then copy the files from this package into the generated project, replacing:
 ```text
 pubspec.yaml
 lib/
-.env.example
 .gitignore
 android/app/src/main/AndroidManifest.xml
 ```
@@ -140,11 +138,21 @@ flutter run
 ## Run
 
 ```bash
-cp .env.example .env
-# edit .env and add your token
 flutter pub get
-flutter run
+flutter run --dart-define=MAPBOX_ACCESS_TOKEN=pk.your_public_token_here
 ```
+
+
+## Patch notes for build errors
+
+This package fixes these reported build/analyzer issues:
+
+- Removed all `.env` / `flutter_dotenv` asset loading.
+- Removed config assets from `pubspec.yaml` so Flutter Web will not fetch `assets/.env`.
+- Fixed `num` to `double` inference in navigation and AR heading math.
+- Replaced deprecated `cameraOptions` with `CameraViewportState` via `viewport`.
+- Replaced deprecated `Color.value` with `toARGB32()`.
+- Replaced deprecated `withOpacity()` with `withValues(alpha: ...)`.
 
 ## File placement
 
@@ -194,4 +202,3 @@ lib/
 - The AR screen is a simulated AR overlay, not camera-based ARCore/ARKit yet. It is intentionally clean and expandable.
 - For real AR, the next step is adding `ar_flutter_plugin` or native ARCore/ARKit integration and placing route anchors in camera space.
 - Offline support here means local app data remains usable offline. Full offline Mapbox tile packs can be added later with Mapbox offline APIs.
-# mapar

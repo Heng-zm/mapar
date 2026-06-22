@@ -17,7 +17,7 @@ class MapboxGeocodingService {
 
   Future<List<PlaceResult>> search(String query, {GeoPoint? proximity}) async {
     final token = _config.mapboxAccessToken;
-    if (token.isEmpty) throw const MappException('Mapbox token is missing. Add it in .env or Settings.');
+    if (token.isEmpty) throw const MappException('Mapbox token is missing. Add it with --dart-define or Settings.');
 
     final trimmed = query.trim();
     if (trimmed.isEmpty) return [];

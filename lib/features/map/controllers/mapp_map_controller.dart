@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as mbx;
 
@@ -39,9 +38,9 @@ class MappMapController extends ChangeNotifier {
       _userCircle = await manager.create(
         mbx.CircleAnnotationOptions(
           geometry: geometry,
-          circleColor: const Color(0xFF2563EB).value,
+          circleColor: const Color(0xFF2563EB).toARGB32(),
           circleRadius: 11,
-          circleStrokeColor: Colors.white.value,
+          circleStrokeColor: Colors.white.toARGB32(),
           circleStrokeWidth: 3,
         ),
       );
@@ -62,9 +61,9 @@ class MappMapController extends ChangeNotifier {
     _selectedCircle = await manager.create(
       mbx.CircleAnnotationOptions(
         geometry: mbx.Point(coordinates: mbx.Position(place.longitude, place.latitude)),
-        circleColor: const Color(0xFFEF4444).value,
+        circleColor: const Color(0xFFEF4444).toARGB32(),
         circleRadius: 10,
-        circleStrokeColor: Colors.white.value,
+        circleStrokeColor: Colors.white.toARGB32(),
         circleStrokeWidth: 2,
       ),
     );
@@ -82,9 +81,9 @@ class MappMapController extends ChangeNotifier {
               .map((point) => mbx.Position(point.longitude, point.latitude))
               .toList(),
         ),
-        lineColor: const Color(0xFF3B82F6).value,
+        lineColor: const Color(0xFF3B82F6).toARGB32(),
         lineWidth: 7,
-        lineBorderColor: Colors.white.value,
+        lineBorderColor: Colors.white.toARGB32(),
         lineBorderWidth: 1.5,
       ),
     );

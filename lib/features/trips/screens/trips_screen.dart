@@ -97,7 +97,7 @@ class _TripMapScreenState extends State<TripMapScreen> {
       appBar: AppBar(title: const Text('Trip Map')),
       body: mbx.MapWidget(
         styleUri: settings.mapStyle.uri,
-        cameraOptions: mbx.CameraOptions(
+        viewport: mbx.CameraViewportState(
           center: first == null ? null : mbx.Point(coordinates: mbx.Position(first.longitude, first.latitude)),
           zoom: 13,
           pitch: 25,
@@ -112,9 +112,9 @@ class _TripMapScreenState extends State<TripMapScreen> {
                     .map((point) => mbx.Position(point.longitude, point.latitude))
                     .toList(),
               ),
-              lineColor: Theme.of(context).colorScheme.primary.value,
+              lineColor: Theme.of(context).colorScheme.primary.toARGB32(),
               lineWidth: 7,
-              lineBorderColor: Colors.white.value,
+              lineBorderColor: Colors.white.toARGB32(),
               lineBorderWidth: 1.4,
             ),
           );

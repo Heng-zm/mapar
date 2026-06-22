@@ -26,7 +26,7 @@ class AROverlay extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(
-          child: CustomPaint(painter: _ARGridPainter(color: scheme.primary.withOpacity(0.18))),
+          child: CustomPaint(painter: _ARGridPainter(color: scheme.primary.withValues(alpha: 0.18))),
         ),
         Positioned(
           top: 48,
@@ -52,8 +52,8 @@ class AROverlay extends StatelessWidget {
               height: 140,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: scheme.primary.withOpacity(0.14),
-                border: Border.all(color: scheme.primary.withOpacity(0.65), width: 2),
+                color: scheme.primary.withValues(alpha: 0.14),
+                border: Border.all(color: scheme.primary.withValues(alpha: 0.65), width: 2),
               ),
               child: Icon(Icons.navigation, size: 82, color: scheme.primary),
             ),
@@ -77,7 +77,7 @@ class AROverlay extends StatelessWidget {
               padding: const EdgeInsets.all(18),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white.withOpacity(0.25)),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.25)),
                   borderRadius: BorderRadius.circular(28),
                 ),
               ),
@@ -100,8 +100,8 @@ class _HudCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: scheme.surface.withOpacity(0.82),
-        border: Border.all(color: scheme.outlineVariant.withOpacity(0.4)),
+        color: scheme.surface.withValues(alpha: 0.82),
+        border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.4)),
       ),
       child: child,
     );
@@ -144,7 +144,7 @@ class _ARGridPainter extends CustomPainter {
       canvas.drawLine(Offset(startX, horizon), Offset(size.width / 2 + i * 90, size.height), paint);
     }
     final crossPaint = Paint()
-      ..color = color.withOpacity(0.9)
+      ..color = color.withValues(alpha: 0.9)
       ..strokeWidth = 2;
     canvas.drawLine(Offset(size.width / 2 - 24, size.height / 2), Offset(size.width / 2 + 24, size.height / 2), crossPaint);
     canvas.drawLine(Offset(size.width / 2, size.height / 2 - 24), Offset(size.width / 2, size.height / 2 + 24), crossPaint);

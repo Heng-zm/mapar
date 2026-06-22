@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -19,9 +18,9 @@ import 'features/trips/services/trip_history_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dotenv.load(fileName: '.env').catchError((_) async {
-    // .env is optional because production builds can use --dart-define.
-  });
+  // No .env asset is loaded here. This avoids Flutter Web 404s such as
+  // `assets/.env` and keeps secrets/config outside the source code.
+  // Provide the token with --dart-define or enter it on the Settings page.
 
   final storage = LocalStorageService();
   await storage.init();

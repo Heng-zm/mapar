@@ -65,9 +65,9 @@ class _ARScreenState extends State<ARScreen> {
       );
     }
 
-    final heading = _compassHeading ?? location.position?.heading ?? 0;
-    final targetBearing = current == null ? 0 : GeoUtils.bearingDegrees(current, destination.point);
-    final delta = GeoUtils.bearingDeltaDegrees(targetBearing, heading);
+    final double heading = (_compassHeading ?? location.position?.heading ?? 0.0).toDouble();
+    final double targetBearing = current == null ? 0.0 : GeoUtils.bearingDegrees(current, destination.point);
+    final double delta = GeoUtils.bearingDeltaDegrees(targetBearing, heading);
     final remaining = nav.distanceRemaining(current);
     final instruction = nav.currentInstruction(current);
 

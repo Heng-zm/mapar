@@ -18,7 +18,7 @@ class MapboxDirectionsService {
     required RouteProfile profile,
   }) async {
     final token = _config.mapboxAccessToken;
-    if (token.isEmpty) throw const MappException('Mapbox token is missing. Add it in .env or Settings.');
+    if (token.isEmpty) throw const MappException('Mapbox token is missing. Add it with --dart-define or Settings.');
 
     final coordinates = '${start.longitude},${start.latitude};${destination.longitude},${destination.latitude}';
     final profilePath = profile.mapboxProfile.split('/').last;

@@ -157,12 +157,12 @@ class SettingsScreen extends StatelessWidget {
           decoration: const InputDecoration(
             labelText: 'Token',
             hintText: 'pk....',
-            helperText: 'For production, prefer .env or --dart-define instead of entering a token in the app.',
+            helperText: 'For production, prefer --dart-define instead of entering a token in the app.',
           ),
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          TextButton(onPressed: () => Navigator.pop(context, ''), child: const Text('Use .env token')),
+          TextButton(onPressed: () => Navigator.pop(context, ''), child: const Text('Use runtime token')),
           FilledButton(onPressed: () => Navigator.pop(context, controller.text.trim()), child: const Text('Save')),
         ],
       ),

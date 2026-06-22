@@ -206,7 +206,7 @@ class _MapScreenState extends State<MapScreen> {
           mbx.MapWidget(
             key: ValueKey('map-${settings.mapStyle.uri}'),
             styleUri: settings.mapStyle.uri,
-            cameraOptions: mbx.CameraOptions(
+            viewport: mbx.CameraViewportState(
               center: mbx.Point(coordinates: mbx.Position(104.9282, 11.5564)),
               zoom: 12,
               pitch: 20,
@@ -250,7 +250,7 @@ class _MapScreenState extends State<MapScreen> {
                     _StatusBanner(icon: Icons.wifi_off, text: 'Offline mode: local saved places, recent searches, and trips are available.'),
                   if (location.error != null) _StatusBanner(icon: Icons.location_off, text: location.error!),
                   if (settings.currentToken.isEmpty)
-                    const _StatusBanner(icon: Icons.key_off, text: 'Mapbox token missing. Add it in .env or Settings.'),
+                    const _StatusBanner(icon: Icons.key_off, text: 'Mapbox token missing. Add it with --dart-define or Settings.'),
                   LocationStatsBar(position: position, settings: settings, poorSignal: location.poorGpsSignal),
                 ],
               ),
