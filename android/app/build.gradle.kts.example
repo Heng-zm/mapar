@@ -1,0 +1,15 @@
+// Place these important settings in android/app/build.gradle.kts after running `flutter create`.
+// Keep the rest of the generated Flutter Gradle file unchanged.
+
+android {
+    namespace = "com.example.mapp_ar"
+    compileSdk = flutter.compileSdkVersion
+
+    defaultConfig {
+        applicationId = "com.example.mapp_ar"
+        minSdk = 23
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+}
